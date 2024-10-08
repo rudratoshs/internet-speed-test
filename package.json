@@ -1,0 +1,27 @@
+{
+    "name": "new",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "chart.js": "^4.4.4",
+        "jspdf": "^2.5.2",
+        "next": "14.2.14",
+        "react": "^18",
+        "react-canvas-gauges": "^1.2.1",
+        "react-chartjs-2": "^5.2.0",
+        "react-d3-speedometer": "^2.2.1",
+        "react-dom": "^18",
+        "socket.io-client": "^4.8.0"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.20",
+        "postcss": "^8.4.47",
+        "tailwindcss": "^3.4.13"
+    }
+}
