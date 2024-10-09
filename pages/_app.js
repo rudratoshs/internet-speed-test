@@ -1,5 +1,30 @@
 import "@/styles/globals.css";
+import { useEffect } from "react";
+import Head from "next/head"; // Import Head from next/head
 
 export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  useEffect(() => {
+    // Register the service worker
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("/sw.js")
+          .then((registration) => {
+            console.log("Service Worker registered with scope:", registration.scope);
+          })
+          .catch((error) => {
+            console.error("Service Worker registration failed:", error);
+          });
+      });
+    }
+  }, []);
+
+  return (
+    <>
+      <Head>
+        <link rel="manifest" href="/manifest.json" /> {/* Link to manifest.json */}
+      </Head>
+      <Component {...pageProps} />
+    </>
+  );
 }

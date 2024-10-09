@@ -12,7 +12,7 @@ export const downloadTest = async (updateGaugeCallback, options = {}) => {
 
     for (let i = 0; i < sizes.length; i++) {
         const size = sizes[i];
-        const url = `https://phpstack-1344875-4935668.cloudwaysapps.com/files/${size}KB.bin`;
+        const url = `${process.env.NEXT_PUBLIC_FILE_CREATION_API_URL}/${size}KB.bin`;
 
         try {
             console.log(`Starting download for ${size} KB...`); // Log the size being downloaded
@@ -82,7 +82,7 @@ export const uploadTest = async () => {
     const blob = new Blob([new Uint8Array(fileSize)], { type: 'application/octet-stream' });
 
     const startTime = Date.now();
-    const url = 'https://forested-cyan-swoop.glitch.me/upload'; // Replace with your server URL
+    const url = process.env.NEXT_PUBLIC_FILE_UPLOAD_URL; // Replace with your server URL
 
     try {
         const response = await fetch(url, {

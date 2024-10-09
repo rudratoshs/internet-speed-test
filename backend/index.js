@@ -11,7 +11,7 @@ app.use(cors());
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: ['http://localhost:3000', 'https://ca08-2405-201-300a-2899-b05c-1513-3ba5-d318.ngrok-free.app'], // Allow these origins
+    origin: [process.env.NEXT_PUBLIC_FRONT_APP_URL, process.env.NEXT_PUBLIC_NGROCK_URL], // Allow these origins
     methods: ['GET', 'POST'],
     credentials: true, // Allow credentials
   }

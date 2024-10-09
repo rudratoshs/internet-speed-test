@@ -10,6 +10,9 @@
     },
     "dependencies": {
         "chart.js": "^4.4.4",
+        "dotenv-webpack": "^8.1.0",
+        "html2canvas": "^1.4.1",
+        "html2pdf.js": "^0.10.2",
         "jspdf": "^2.5.2",
         "next": "14.2.14",
         "react": "^18",

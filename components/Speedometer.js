@@ -57,9 +57,7 @@ const Speedometer = ({ label, value, max }) => {
       <h3 className="mt-4 text-lg text-[#E0E0E0]">
         {label} Speed: {isValidValue ? numericValue : 0} {label === 'Ping' ? 'ms' : 'Mbps'}
       </h3>
-      <button onClick={generatePDF} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
-        Download Report
-      </button>
+
     </div>
   );
 };

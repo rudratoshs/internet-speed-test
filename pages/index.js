@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import dynamic from 'next/dynamic';
 const Speedometer = dynamic(() => import('../components/Speedometer'), {
@@ -7,9 +7,10 @@ const Speedometer = dynamic(() => import('../components/Speedometer'), {
 import PastResults from '../components/PastResults';
 import CustomTestParam from '../components/CustomTestParam'; // Import the new component
 import { downloadTest, uploadTest } from '../components/SpeedTest';
+import ReportSection from '../components/ReportSection';
 
-const socket = io('http://localhost:3001');
-
+const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL);
+console.log('process.env.REACT_APP_API_KEY' ,process.env.REACT_APP_API_KEY)
 const Home = () => {
   const [ping, setPing] = useState(0);
   const [downloadSpeed, setDownloadSpeed] = useState(0);
@@ -20,6 +21,18 @@ const Home = () => {
   const [isCustomSettingsEnabled, setIsCustomSettingsEnabled] = useState(false);
   const [isTesting, setIsTesting] = useState(false);
   const [activeSpeedometer, setActiveSpeedometer] = useState(null);
+
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then((registration) => {
+          console.log('Service Worker registered with scope:', registration.scope);
+        }).catch((error) => {
+          console.error('Service Worker registration failed:', error);
+        });
+      });
+    }
+  }, []);
 
   const toggleCustomSettings = () => {
     setIsCustomSettingsEnabled(!isCustomSettingsEnabled);
@@ -53,7 +66,6 @@ const Home = () => {
 
   // Determine button text and color
   const buttonText = isTesting ? 'Processing...' : (downloadSpeed && uploadSpeed) ? 'Re-Test' : 'Start Testing';
-  const buttonColor = isTesting ? 'bg-yellow-500' : (downloadSpeed && uploadSpeed) ? 'bg-green-600' : 'bg-red-600';
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-4 sm:p-8">
@@ -79,14 +91,20 @@ const Home = () => {
 
       <button
         onClick={startTest}
-        className={`mt-8 px-6 py-3 rounded-lg text-lg button  bg-green-600
-    ${isTesting ? 'processing' : (downloadSpeed > 0 && uploadSpeed > 0 ? 'completed' : '')}`}
-      >
+        className={`mt-8 px-6 py-3 rounded-sm text-sm button  bg-green-600
+    ${isTesting ? 'processing' : (downloadSpeed > 0 && uploadSpeed > 0 ? 'completed' : '')}`} >
         {isTesting ? 'Processing...' : (downloadSpeed > 0 && uploadSpeed > 0 ? 'Test Again' : 'Start Testing')}
       </button>
-      <div className="flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0" style={{width:"100%"}}>
 
-      <PastResults />
+      <ReportSection
+        ping={ping}
+        downloadSpeed={downloadSpeed}
+        uploadSpeed={uploadSpeed}
+        isTesting={isTesting}
+      />
+
+      <div className="flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0 items-center justify-center" style={{ width: "100%" }}>
+        <PastResults />
       </div>
     </div>
   );
