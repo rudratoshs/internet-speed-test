@@ -57,3 +57,56 @@ input:focus {
   border-color: #4A90E2;
   background-color: #3A3A3A;
 }
+
+.speedometer-active {
+  border-color: orange;
+  border-width: 2px;
+  border-style: solid;
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+  /* Optional: Add a glow effect */
+}
+
+/* Example Button Animation Styles */
+.button {
+  position: relative;
+  /* width: 200px;
+  height: 50px;
+  border-radius: 25px; */
+  background-color:#ef4444;
+  /* Initial color before starting */
+  color: white;
+  text-align: center;
+  /* line-height: 50px; Center the text vertically */
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  --tw-bg-opacity: 1;
+}
+
+.button.processing {
+  background-color: #fde047;
+  /* Color during processing */
+  animation: pulsate 1s infinite;
+  /* Example animation */
+}
+
+.button.completed {
+  background-color: #4ade80;
+  /* Color after completion */
+  animation: none;
+  /* No animation on completion */
+}
+
+/* Pulsate Animation */
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

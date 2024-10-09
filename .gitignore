@@ -1,0 +1,14 @@
+# Local Netlify folder
+.netlify
+
+# Node modules
+**/node_modules
+
+# Environment variables
+.env
+
+# Next.js build output
+.next
+
+# Backend node modules
+/backend/**/node_modules

@@ -3,6 +3,7 @@ import ReactSpeedometer from 'react-d3-speedometer';
 import jsPDF from 'jspdf';
 
 const Speedometer = ({ label, value, max }) => {
+  console.log('',label, 'value', value);
   // Convert value to a number
   const numericValue = Math.round(Number(value)); // Convert and round value to a number
   const isValidValue = !isNaN(numericValue) && numericValue >= 0; // Check if it's a valid number
