@@ -11,9 +11,8 @@ app.use(cors());
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: [process.env.NEXT_PUBLIC_FRONT_APP_URL, process.env.NEXT_PUBLIC_NGROCK_URL], // Allow these origins
-    methods: ['GET', 'POST'],
-    credentials: true, // Allow credentials
+    origin: "*",
+    methods: ['GET', 'POST']
   }
 });
 
